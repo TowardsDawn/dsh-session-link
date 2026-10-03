@@ -8,10 +8,11 @@
 # and a second `session-reference` id fails the whole boot with
 # "duplicate loader entry id: session-reference".
 #
-# This plugin requires dsh >= 0.1.7-rc.1 for the `ctx.uiWorkspace.openSession()`
-# navigation seam the browser half uses; earlier versions lack that seam. The
-# `session-reference` service is not the reason for the floor: the shipped web
-# bundle has provided it since dsh 0.1.0-rc.8.
+# This plugin requires dsh >= 0.2.0-rc.2: its peerDependencies pin the runtime
+# copies of `dsh-session-reference` and the three `dsh-client-*` packages, and
+# dsh refuses to start a plugin whose peers do not match the running version.
+# All four ship with the runtime — this package must never install its own
+# copy, or the stale duplicate shadows the shipped one.
 - insert:
     - id: session-link
       name: 'dsh-session-link'
